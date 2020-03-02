@@ -1,17 +1,3 @@
-/*
- * FileName: TestServiceImpl.java
- * Author  : Ajimon
- * 
- * Using JRE 1.8.0_211
- * 
- * Copyright(c) 2020 Finance.
- * Duplication or distribution of this code in part or in whole by any media
- * without the express written permission of Finance or its agents is
- * strictly prohibited.
- *  
- * REVISION         DATE        NAME       DESCRIPTION
- * 511.101       2 Jan, 2020       Ajimon      Initial Code  
- */
 
 package com.Test.service.impl;
 
@@ -30,6 +16,8 @@ import com.Test.util.ParamErrors;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -140,8 +128,34 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public Response getUserByuserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ParamErrors> paramErrorsList = new ArrayList<>();
+		ParamErrors paramErrors = new ParamErrors();
+		User user = new User();
+
+		try {
+			if (userId == null) {
+				paramErrors.setParamName(Constants.USERID);
+				paramErrors.setError(Constants.USERID_IS_REQUIRED);
+				paramErrorsList.add(paramErrors);
+			}
+
+			if (!paramErrorsList.isEmpty()) {
+				throw new CommonException(ErrorMessages.INVALID_PARAMETERS, Constants.INVALID_REQUEST, paramErrorsList);
+			}
+			user = userRepository.getUserByUserId(UUID.fromString(userId));
+			if (user == null) {
+				paramErrors = new ParamErrors();
+				paramErrors.setParamName(Constants.USER_NOT_EXIST);
+				paramErrors.setError(Constants.USER_NOT_EXIST);
+				paramErrorsList.add(paramErrors);
+				throw new CommonException(ErrorMessages.INVALID_PARAMETERS, Constants.INVALID_REQUEST, paramErrorsList);
+			}
+
+		} catch (DataIntegrityViolationException e) {
+			throw new CommonException(ErrorCode.DUPLICATION.toString(), Constants.USER_NOT_EXIST, null);
+		}
+		return ResponseHelper.getSuccessResponse(Constants.USER_FETCHED, UserConverterHelper.getUserFromEntity(user),
+				Constants.USER_FETCHED_SUCCESS);
 	}
 
 	/**
