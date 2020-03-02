@@ -1,6 +1,8 @@
 
 package com.Test.service;
 
+import java.text.ParseException;
+
 import com.Test.common.Response;
 import com.Test.request.entity.UserRequest;
 
@@ -15,8 +17,9 @@ public interface UserService {
 	 *
 	 * @param userRequest the user request
 	 * @return the response
+	 * @throws ParseException 
 	 */
-	Response createUser(UserRequest userRequest);
+	Response createUser(UserRequest userRequest) throws ParseException;
 
 	/**
 	 * Update user.

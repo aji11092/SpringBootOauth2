@@ -10,14 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * The Interface TestRepository.
  */
-public interface TestRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 
-	/**
-	 * Gets the user by user id.
-	 *
-	 * @param userId the user id
-	 * @return the user by user id
-	 */
-	User getUserByUserId(UUID userId);
+	
 
 }

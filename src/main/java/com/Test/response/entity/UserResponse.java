@@ -9,70 +9,75 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class UserResponse {
 
-    /** The test id. */
-    @ApiModelProperty(value = "testId for the test")
-    private String testId;
+	@ApiModelProperty(value = "userId for the UserResponse")
+	private String userId;
 
-    /** The name. */
-    @ApiModelProperty(value = "name for the test")
-    private String name;
+	/** The name. */
+	@ApiModelProperty(value = "name for the UserResponse")
+	private String name;
 
-    /** The test description. */
-    @ApiModelProperty(value = "testDescription for the test")
-    private String testDescription;
+	/** The father name. */
+	@ApiModelProperty(value = "fatherName for the UserResponse")
+	private String fatherName;
 
-    /**
-     * Gets the test id.
-     *
-     * @return the test id
-     */
-    public String getTestId() {
-        return testId;
-    }
+	/** The mother name. */
+	@ApiModelProperty(value = "motherName for the UserResponse")
+	private String motherName;
 
-    /**
-     * Sets the test id.
-     *
-     * @param testId the new test id
-     */
-    public void setTestId(String testId) {
-        this.testId = testId;
-    }
+	/** The mobile number. */
+	@ApiModelProperty(value = "mobileNumber for the UserResponse")
+	private String mobileNumber;
 
-    /**
-     * Gets the name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+	/** The test description. */
+	@ApiModelProperty(value = "description for the UserResponse")
+	private String description;
 
-    /**
-     * Sets the name.
-     *
-     * @param name the new name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getUserId() {
+		return userId;
+	}
 
-    /**
-     * Gets the test description.
-     *
-     * @return the test description
-     */
-    public String getTestDescription() {
-        return testDescription;
-    }
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-    /**
-     * Sets the test description.
-     *
-     * @param testDescription the new test description
-     */
-    public void setTestDescription(String testDescription) {
-        this.testDescription = testDescription;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }

@@ -5,6 +5,9 @@ import com.Test.common.Response;
 import com.Test.delegate.UserDeligate;
 import com.Test.request.entity.UserRequest;
 import com.Test.service.UserService;
+
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -27,9 +30,10 @@ public class UserDeligateImpl implements UserDeligate {
 	 *
 	 * @param userRequest the user request
 	 * @return the response
+	 * @throws ParseException 
 	 */
 	@Override
-	public Response createUser(UserRequest userRequest) {
+	public Response createUser(UserRequest userRequest) throws ParseException {
 
 		return service.createUser(userRequest);
 	}

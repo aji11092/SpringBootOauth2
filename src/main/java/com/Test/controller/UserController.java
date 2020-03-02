@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
  * The Class TestController.
  */
 @RestController
-@RequestMapping({"/core/v1.0/test", "/core/v1.1/test"})
+@RequestMapping({"/core/v1.0/user"})
 @Api(tags = "TestController")
 @CrossOrigin
 public class UserController {

@@ -49,7 +49,7 @@ public class User {
 	/** The mobile number. */
 	@ApiModelProperty(value = "mobileNumber for the user_details")
 	@Column(name = "mobile_number")
-	private Integer mobileNumber;
+	private String mobileNumber;
 
 	/** The test description. */
 	@ApiModelProperty(value = "description for the user_details")
@@ -133,7 +133,7 @@ public class User {
 	 *
 	 * @return the mobile number
 	 */
-	public Integer getMobileNumber() {
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
@@ -142,7 +142,7 @@ public class User {
 	 *
 	 * @param mobileNumber the new mobile number
 	 */
-	public void setMobileNumber(Integer mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
