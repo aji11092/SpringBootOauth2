@@ -33,6 +33,28 @@ public class UserRequest {
 	@ApiModelProperty(value = "description for the UserRequest")
 	private String description;
 
+	/** The created date. */
+	@ApiModelProperty(value = "createdDate for the UserRequest")
+	private String createdDate;
+
+	/**
+	 * Gets the created date.
+	 *
+	 * @return the created date
+	 */
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	/**
+	 * Sets the created date.
+	 *
+	 * @param createdDate the new created date
+	 */
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
 	/**
 	 * Gets the user id.
 	 *

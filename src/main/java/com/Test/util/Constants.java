@@ -41,6 +41,8 @@ public class Constants {
     public static final String USER_FETCHED_SUCCESS = "USER_FETCHED_SUCCESS";
     public static final String USER_DELETED = "USER_DELETED";
     public static final String USER_DELETED_SUCCESS = "USER_DELETED_SUCCESS";
+    public static final String ALL_USER_FETCH = "ALL_USER_FETCH";
+    public static final String ALL_USER_FETCH_SUCCESS = "ALL_USER_FETCH_SUCCESS";
 
   
     private Constants() {

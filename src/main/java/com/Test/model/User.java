@@ -1,6 +1,7 @@
 
 package com.Test.model;
 
+import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,6 +56,10 @@ public class User {
 	@ApiModelProperty(value = "description for the user_details")
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
+	
+	 @ApiModelProperty(value = "createdDate for the user_details")
+	    @Column(name = "created_date")
+	    private Date createdDate;
 
 	/**
 	 * Gets the user id.
@@ -163,5 +168,14 @@ public class User {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	
 
 }

@@ -10,27 +10,27 @@ import java.util.List;
 public class UserResponseList {
 
 	/** The test responses. */
-	private List<UserResponse> testResponses;
+	private List<UserResponse> userResponses;
 
 	/** The total count. */
 	private long totalCount;
 
 	/**
-	 * Gets the test responses.
+	 * Gets the user responses.
 	 *
-	 * @return the test responses
+	 * @return the user responses
 	 */
-	public List<UserResponse> getTestResponses() {
-		return testResponses;
+	public List<UserResponse> getUserResponses() {
+		return userResponses;
 	}
 
 	/**
-	 * Sets the test responses.
+	 * Sets the user responses.
 	 *
-	 * @param testResponses the new test responses
+	 * @param userResponses the new user responses
 	 */
-	public void setTestResponses(List<UserResponse> testResponses) {
-		this.testResponses = testResponses;
+	public void setUserResponses(List<UserResponse> userResponses) {
+		this.userResponses = userResponses;
 	}
 
 	/**

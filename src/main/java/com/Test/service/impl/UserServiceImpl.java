@@ -13,6 +13,10 @@ import com.Test.request.entity.UserRequest;
 import com.Test.service.UserService;
 import com.Test.util.Constants;
 import com.Test.util.ParamErrors;
+import com.Test.util.TextUtil;
+import com.Test.util.Util;
+import com.google.common.base.Strings;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,10 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 // TODO: Auto-generated Javadoc
@@ -170,11 +178,43 @@ public class UserServiceImpl implements UserService {
 	 * @param partnerId  the partner id
 	 * @return the all user
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	public Response getAllUser(int pageSize, int pageNumber, String sortOrder, String sortKey, String searchKey,
 			String userId, String partnerId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ParamErrors> paramErrorsList = new ArrayList<>();
+		ParamErrors paramErrors = new ParamErrors();
+		Sort sort = null;
+		List<User> userList = null;
+		long totalCount = 0;
+		Page<User> pages = null;
+		Pageable pageRequest = null;
+
+		try {
+
+			if (!TextUtil.isEmpty(sortKey)) {
+				sort = new Sort(sortOrder.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC, sortKey);
+			}
+			if (TextUtil.isEmpty(sortKey)) {
+				sort = new Sort("desc".equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
+						"createdDate");
+			}
+			pageRequest = new PageRequest(pageNumber, pageSize, sort);
+			if (Strings.isNullOrEmpty(searchKey)) {
+				pages = userRepository.findAll(pageRequest);
+			}
+			if (pages != null && !Util.isNullOrEmpty(pages.getContent())) {
+				totalCount = pages.getTotalElements();
+				userList = pages.getContent();
+
+			}
+
+		} catch (DataIntegrityViolationException e) {
+			throw new CommonException(ErrorCode.DUPLICATION.toString(), Constants.USER_NOT_EXIST, null);
+		}
+		return ResponseHelper.getSuccessResponse(Constants.ALL_USER_FETCH,
+				UserConverterHelper.getUserResponseListFromEntity(userList, totalCount),
+				Constants.ALL_USER_FETCH_SUCCESS);
 	}
 
 	/**
@@ -212,8 +252,7 @@ public class UserServiceImpl implements UserService {
 		} catch (DataIntegrityViolationException e) {
 			throw new CommonException(ErrorCode.DUPLICATION.toString(), Constants.USER_NOT_EXIST, null);
 		}
-		return ResponseHelper.getSuccessResponse(Constants.USER_DELETED,"DELETED",
-				Constants.USER_DELETED_SUCCESS);
+		return ResponseHelper.getSuccessResponse(Constants.USER_DELETED, "DELETED", Constants.USER_DELETED_SUCCESS);
 	}
 
 }
