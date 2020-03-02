@@ -151,13 +151,12 @@ public class UserController {
 		@SuppressWarnings("unused")
 		Response responseObj = null;
 		try {
-			testDeligate.deleteUserByuserId(userId);
+			responseObj=testDeligate.deleteUserByuserId(userId);
 		} catch (CommonException e) {
 			 responseObj = Util.turfException(e);
 		}
-		return null;
-		// ResponseHelper.getSuccessResponse("test Deleted", "DELETED",
-		// "TEST_DELETED_SUCCESS");
+		return responseObj;
+		
 	}
 
 }

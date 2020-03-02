@@ -89,7 +89,7 @@ public class UserDeligateImpl implements UserDeligate {
 	 * @return the object
 	 */
 	@Override
-	public Object deleteUserByuserId(String userId) {
+	public Response deleteUserByuserId(String userId) {
 
 		return service.deleteUserByuserId(userId);
 

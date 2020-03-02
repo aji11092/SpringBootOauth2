@@ -184,9 +184,36 @@ public class UserServiceImpl implements UserService {
 	 * @return the object
 	 */
 	@Override
-	public Object deleteUserByuserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Response deleteUserByuserId(String userId) {
+		List<ParamErrors> paramErrorsList = new ArrayList<>();
+		ParamErrors paramErrors = new ParamErrors();
+		User user = new User();
+
+		try {
+			if (userId == null) {
+				paramErrors.setParamName(Constants.USERID);
+				paramErrors.setError(Constants.USERID_IS_REQUIRED);
+				paramErrorsList.add(paramErrors);
+			}
+
+			if (!paramErrorsList.isEmpty()) {
+				throw new CommonException(ErrorMessages.INVALID_PARAMETERS, Constants.INVALID_REQUEST, paramErrorsList);
+			}
+			user = userRepository.getUserByUserId(UUID.fromString(userId));
+			if (user == null) {
+				paramErrors = new ParamErrors();
+				paramErrors.setParamName(Constants.USER_NOT_EXIST);
+				paramErrors.setError(Constants.USER_NOT_EXIST);
+				paramErrorsList.add(paramErrors);
+				throw new CommonException(ErrorMessages.INVALID_PARAMETERS, Constants.INVALID_REQUEST, paramErrorsList);
+			}
+			userRepository.delete(user);
+
+		} catch (DataIntegrityViolationException e) {
+			throw new CommonException(ErrorCode.DUPLICATION.toString(), Constants.USER_NOT_EXIST, null);
+		}
+		return ResponseHelper.getSuccessResponse(Constants.USER_DELETED,"DELETED",
+				Constants.USER_DELETED_SUCCESS);
 	}
 
 }

@@ -39,6 +39,8 @@ public class Constants {
     public static final String USER_UPDATED_SUCCESS = "USER_UPDATED_SUCCESS";
     public static final String USER_FETCHED = "USER_FETCHED";
     public static final String USER_FETCHED_SUCCESS = "USER_FETCHED_SUCCESS";
+    public static final String USER_DELETED = "USER_DELETED";
+    public static final String USER_DELETED_SUCCESS = "USER_DELETED_SUCCESS";
 
   
     private Constants() {

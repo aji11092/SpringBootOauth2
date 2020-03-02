@@ -59,6 +59,6 @@ public interface UserDeligate {
 	 * @param userId the user id
 	 * @return the object
 	 */
-	Object deleteUserByuserId(String userId);
+	Response deleteUserByuserId(String userId);
 
 }
