@@ -17,7 +17,7 @@ public interface UserService {
 	 *
 	 * @param userRequest the user request
 	 * @return the response
-	 * @throws ParseException 
+	 * @throws ParseException the parse exception
 	 */
 	Response createUser(UserRequest userRequest) throws ParseException;
 
@@ -26,8 +26,9 @@ public interface UserService {
 	 *
 	 * @param userRequest the user request
 	 * @return the response
+	 * @throws ParseException the parse exception
 	 */
-	Response updateUser(UserRequest userRequest);
+	Response updateUser(UserRequest userRequest) throws ParseException;
 
 	/**
 	 * Gets the user byuser id.

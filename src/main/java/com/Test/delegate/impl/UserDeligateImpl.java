@@ -30,7 +30,7 @@ public class UserDeligateImpl implements UserDeligate {
 	 *
 	 * @param userRequest the user request
 	 * @return the response
-	 * @throws ParseException 
+	 * @throws ParseException the parse exception
 	 */
 	@Override
 	public Response createUser(UserRequest userRequest) throws ParseException {
@@ -43,9 +43,10 @@ public class UserDeligateImpl implements UserDeligate {
 	 *
 	 * @param userRequest the user request
 	 * @return the response
+	 * @throws ParseException the parse exception
 	 */
 	@Override
-	public Response updateUser(UserRequest userRequest) {
+	public Response updateUser(UserRequest userRequest) throws ParseException {
 
 		return service.updateUser(userRequest);
 	}

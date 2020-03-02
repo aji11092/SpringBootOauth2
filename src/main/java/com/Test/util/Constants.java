@@ -35,6 +35,8 @@ public class Constants {
     public static final String USER_CREATED = "USER_CREATED";
     public static final String USER_NOT_EXIST = "USER_NOT_EXIST";
     public static final String USER_CREATE_SUCCESS = "USER_CREATE_SUCCESS";
+    public static final String USER_UPDATED = "USER_UPDATED";
+    public static final String USER_UPDATED_SUCCESS = "USER_UPDATED_SUCCESS";
 
   
     private Constants() {

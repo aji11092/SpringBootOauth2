@@ -34,60 +34,128 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserServiceImpl.
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserRepository userRepository;
+	/** The user repository. */
+	@Autowired
+	UserRepository userRepository;
 
+	/**
+	 * Creates the user.
+	 *
+	 * @param userRequest the user request
+	 * @return the response
+	 * @throws ParseException the parse exception
+	 */
 	@Override
 	public Response createUser(UserRequest userRequest) throws ParseException {
 		List<ParamErrors> paramErrorsList = new ArrayList<>();
-        ParamErrors paramErrors = new ParamErrors();
-        User user = new User();
+		ParamErrors paramErrors = new ParamErrors();
+		User user = new User();
 
-        try {
+		try {
 
-            if (userRequest.getName() == null) {
-                paramErrors.setParamName(Constants.NAME);
-                paramErrors.setError(Constants.NAME_IS_REQUIRED);
-                paramErrorsList.add(paramErrors);
-            }
-            
-            if (userRequest.getMobileNumber() == null) {
-                paramErrors.setParamName(Constants.MOBILE_NUMBER);
-                paramErrors.setError(Constants.MOBILE_NUMBER_IS_REQUIRED);
-                paramErrorsList.add(paramErrors);
-            }
-           
+			if (userRequest.getName() == null) {
+				paramErrors.setParamName(Constants.NAME);
+				paramErrors.setError(Constants.NAME_IS_REQUIRED);
+				paramErrorsList.add(paramErrors);
+			}
 
-            if (!paramErrorsList.isEmpty()) {
-                throw new CommonException(ErrorMessages.INVALID_PARAMETERS, Constants.INVALID_REQUEST, paramErrorsList);
-            }
-            user = UserConverterHelper.getUserRequest(userRequest);
-          
-            user = userRepository.save(user);
+			if (userRequest.getMobileNumber() == null) {
+				paramErrors.setParamName(Constants.MOBILE_NUMBER);
+				paramErrors.setError(Constants.MOBILE_NUMBER_IS_REQUIRED);
+				paramErrorsList.add(paramErrors);
+			}
 
-        } catch (DataIntegrityViolationException e) {
-            throw new CommonException(ErrorCode.DUPLICATION.toString(), Constants.USER_NOT_EXIST, null);
-        }
-        return ResponseHelper.getSuccessResponse(Constants.USER_CREATED,
-        		UserConverterHelper.getUserFromEntity(user), Constants.USER_CREATE_SUCCESS);
+			if (!paramErrorsList.isEmpty()) {
+				throw new CommonException(ErrorMessages.INVALID_PARAMETERS, Constants.INVALID_REQUEST, paramErrorsList);
+			}
+			user = UserConverterHelper.getUserRequest(userRequest);
+
+			user = userRepository.save(user);
+
+		} catch (DataIntegrityViolationException e) {
+			throw new CommonException(ErrorCode.DUPLICATION.toString(), Constants.USER_NOT_EXIST, null);
+		}
+		return ResponseHelper.getSuccessResponse(Constants.USER_CREATED, UserConverterHelper.getUserFromEntity(user),
+				Constants.USER_CREATE_SUCCESS);
 	}
 
+	/**
+	 * Update user.
+	 *
+	 * @param userRequest the user request
+	 * @return the response
+	 * @throws ParseException the parse exception
+	 */
 	@Override
-	public Response updateUser(UserRequest userRequest) {
-		// TODO Auto-generated method stub
-		return null;
+	public Response updateUser(UserRequest userRequest) throws ParseException {
+		List<ParamErrors> paramErrorsList = new ArrayList<>();
+		ParamErrors paramErrors = new ParamErrors();
+		User user = new User();
+
+		try {
+			if (userRequest.getUserId() == null) {
+				paramErrors.setParamName(Constants.USERID);
+				paramErrors.setError(Constants.USERID_IS_REQUIRED);
+				paramErrorsList.add(paramErrors);
+			}
+
+			if (userRequest.getName() == null) {
+				paramErrors.setParamName(Constants.NAME);
+				paramErrors.setError(Constants.NAME_IS_REQUIRED);
+				paramErrorsList.add(paramErrors);
+			}
+
+			if (userRequest.getMobileNumber() == null) {
+				paramErrors.setParamName(Constants.MOBILE_NUMBER);
+				paramErrors.setError(Constants.MOBILE_NUMBER_IS_REQUIRED);
+				paramErrorsList.add(paramErrors);
+			}
+
+			if (!paramErrorsList.isEmpty()) {
+				throw new CommonException(ErrorMessages.INVALID_PARAMETERS, Constants.INVALID_REQUEST, paramErrorsList);
+			}
+			user = UserConverterHelper.getUserRequest(userRequest);
+
+			user = userRepository.save(user);
+
+		} catch (DataIntegrityViolationException e) {
+			throw new CommonException(ErrorCode.DUPLICATION.toString(), Constants.USER_NOT_EXIST, null);
+		}
+		return ResponseHelper.getSuccessResponse(Constants.USER_UPDATED, UserConverterHelper.getUserFromEntity(user),
+				Constants.USER_UPDATED_SUCCESS);
 	}
 
+	/**
+	 * Gets the user byuser id.
+	 *
+	 * @param userId the user id
+	 * @return the user byuser id
+	 */
 	@Override
 	public Response getUserByuserId(String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Gets the all user.
+	 *
+	 * @param pageSize   the page size
+	 * @param pageNumber the page number
+	 * @param sortOrder  the sort order
+	 * @param sortKey    the sort key
+	 * @param searchKey  the search key
+	 * @param userId     the user id
+	 * @param partnerId  the partner id
+	 * @return the all user
+	 */
 	@Override
 	public Response getAllUser(int pageSize, int pageNumber, String sortOrder, String sortKey, String searchKey,
 			String userId, String partnerId) {
@@ -95,11 +163,16 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	/**
+	 * Delete user byuser id.
+	 *
+	 * @param userId the user id
+	 * @return the object
+	 */
 	@Override
 	public Object deleteUserByuserId(String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-   
 }
