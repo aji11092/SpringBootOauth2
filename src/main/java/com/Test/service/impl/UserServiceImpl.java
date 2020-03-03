@@ -7,10 +7,10 @@ import com.Test.common.Response;
 import com.Test.exception.CommonException;
 import com.Test.helper.ResponseHelper;
 import com.Test.helper.UserConverterHelper;
-import com.Test.model.User;
-import com.Test.repository.UserRepository;
+import com.Test.model.UserRegisterDetails;
+import com.Test.repository.UserRegisterDetailsRepository;
 import com.Test.request.entity.UserRequest;
-import com.Test.service.UserService;
+import com.Test.service.UserRegisterDetailsService;
 import com.Test.util.Constants;
 import com.Test.util.ParamErrors;
 import com.Test.util.TextUtil;
@@ -35,11 +35,11 @@ import org.springframework.stereotype.Service;
  * The Class UserServiceImpl.
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserRegisterDetailsService {
 
 	/** The user repository. */
 	@Autowired
-	UserRepository userRepository;
+	UserRegisterDetailsRepository userRepository;
 
 	/**
 	 * Creates the user.
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	public Response createUser(UserRequest userRequest) throws ParseException {
 		List<ParamErrors> paramErrorsList = new ArrayList<>();
 		ParamErrors paramErrors = new ParamErrors();
-		User user = new User();
+		UserRegisterDetails user = new UserRegisterDetails();
 
 		try {
 
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 	public Response updateUser(UserRequest userRequest) throws ParseException {
 		List<ParamErrors> paramErrorsList = new ArrayList<>();
 		ParamErrors paramErrors = new ParamErrors();
-		User user = new User();
+		UserRegisterDetails user = new UserRegisterDetails();
 
 		try {
 			if (userRequest.getUserId() == null) {
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
 	public Response getUserByuserId(String userId) {
 		List<ParamErrors> paramErrorsList = new ArrayList<>();
 		ParamErrors paramErrors = new ParamErrors();
-		User user = new User();
+		UserRegisterDetails user = new UserRegisterDetails();
 
 		try {
 			if (userId == null) {
@@ -185,9 +185,9 @@ public class UserServiceImpl implements UserService {
 		List<ParamErrors> paramErrorsList = new ArrayList<>();
 		ParamErrors paramErrors = new ParamErrors();
 		Sort sort = null;
-		List<User> userList = null;
+		List<UserRegisterDetails> userList = null;
 		long totalCount = 0;
-		Page<User> pages = null;
+		Page<UserRegisterDetails> pages = null;
 		Pageable pageRequest = null;
 
 		try {
@@ -227,7 +227,7 @@ public class UserServiceImpl implements UserService {
 	public Response deleteUserByuserId(String userId) {
 		List<ParamErrors> paramErrorsList = new ArrayList<>();
 		ParamErrors paramErrors = new ParamErrors();
-		User user = new User();
+		UserRegisterDetails user = new UserRegisterDetails();
 
 		try {
 			if (userId == null) {

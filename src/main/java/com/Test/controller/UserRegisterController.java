@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping({ "/core/v1.0/user" })
 @Api(tags = "TestController")
 @CrossOrigin
-public class UserController {
+public class UserRegisterController {
 
 	/** The test deligate. */
 	@Autowired
@@ -49,6 +50,7 @@ public class UserController {
 	 */
 	@PostMapping
 	@ResponseBody
+	@PreAuthorize("hasAuthority('CREATE_USER')")
 	@ApiOperation(value = "To save a createTest", notes = "A createTest can be created with its fields")
 	public Response createUser(@RequestBody UserRequest userRequest) throws ParseException {
 		Response responseObj = null;

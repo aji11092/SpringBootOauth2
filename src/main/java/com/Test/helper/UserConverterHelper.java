@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import com.Test.model.User;
+import com.Test.model.UserRegisterDetails;
 import com.Test.request.entity.UserRequest;
 import com.Test.response.entity.UserResponse;
 import com.Test.response.entity.UserResponseList;
@@ -24,8 +24,8 @@ public class UserConverterHelper {
 	 * @return the user request
 	 * @throws ParseException the parse exception
 	 */
-	public static User getUserRequest(UserRequest userRequest) throws ParseException {
-		User user = new User();
+	public static UserRegisterDetails getUserRequest(UserRequest userRequest) throws ParseException {
+		UserRegisterDetails user = new UserRegisterDetails();
 		if (!Strings.isNullOrEmpty(userRequest.getUserId())) {
 			user.setUserId(UUID.fromString(userRequest.getUserId()));
 		}
@@ -33,7 +33,7 @@ public class UserConverterHelper {
 			user.setCreatedDate(Util.getTodayInCST());
 		}
 		if (!Strings.isNullOrEmpty(userRequest.getName())) {
-			user.setName(userRequest.getName());
+			user.setUserName((userRequest.getName()));
 		}
 		if (!Strings.isNullOrEmpty(userRequest.getMotherName())) {
 			user.setMotherName(userRequest.getMotherName());
@@ -57,15 +57,15 @@ public class UserConverterHelper {
 	 * @param user the user
 	 * @return the user from entity
 	 */
-	public static UserResponse getUserFromEntity(User user) {
+	public static UserResponse getUserFromEntity(UserRegisterDetails user) {
 
 		UserResponse userResponse = new UserResponse();
 		if (!Strings.isNullOrEmpty(user.getUserId().toString())) {
 			userResponse.setUserId(user.getUserId().toString());
 			
 		}
-		if (!Strings.isNullOrEmpty(user.getName())) {
-			userResponse.setName(user.getName());
+		if (!Strings.isNullOrEmpty(user.getUserName())) {
+			userResponse.setName(user.getUserName());
 		}
 		
 		if (user.getCreatedDate()!=null) {
@@ -94,11 +94,11 @@ public class UserConverterHelper {
 	 * @param totalCount the total count
 	 * @return the group memberr response list from entity
 	 */
-	public static UserResponseList getUserResponseListFromEntity(List<User> userList, long totalCount) {
+	public static UserResponseList getUserResponseListFromEntity(List<UserRegisterDetails> userList, long totalCount) {
 		UserResponseList userResponsesList = new UserResponseList();
 		List<UserResponse> userResponses = new ArrayList<>();
 		if (userList != null) {
-			for (User user : userList) {
+			for (UserRegisterDetails user : userList) {
 				userResponses.add(getUserFromEntity(user));
 
 			}

@@ -4,7 +4,7 @@ package com.Test.delegate.impl;
 import com.Test.common.Response;
 import com.Test.delegate.UserDeligate;
 import com.Test.request.entity.UserRequest;
-import com.Test.service.UserService;
+import com.Test.service.UserRegisterDetailsService;
 
 import java.text.ParseException;
 
@@ -23,7 +23,7 @@ public class UserDeligateImpl implements UserDeligate {
 
 	/** The service. */
 	@Autowired
-	UserService service;
+	UserRegisterDetailsService service;
 
 	/**
 	 * Creates the user.

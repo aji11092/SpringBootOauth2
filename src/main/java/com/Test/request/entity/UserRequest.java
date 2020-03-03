@@ -33,6 +33,14 @@ public class UserRequest {
 	@ApiModelProperty(value = "description for the UserRequest")
 	private String description;
 
+	/** The email. */
+	@ApiModelProperty(value = "email for the user_details")
+	private String email;
+
+	/** The password. */
+	@ApiModelProperty(value = "description for the user_details")
+	private String password;
+
 	/** The created date. */
 	@ApiModelProperty(value = "createdDate for the UserRequest")
 	private String createdDate;
@@ -161,6 +169,42 @@ public class UserRequest {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * Gets the email.
+	 *
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * Sets the email.
+	 *
+	 * @param email the new email
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the new password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

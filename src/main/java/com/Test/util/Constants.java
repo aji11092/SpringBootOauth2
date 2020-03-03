@@ -43,6 +43,10 @@ public class Constants {
     public static final String USER_DELETED_SUCCESS = "USER_DELETED_SUCCESS";
     public static final String ALL_USER_FETCH = "ALL_USER_FETCH";
     public static final String ALL_USER_FETCH_SUCCESS = "ALL_USER_FETCH_SUCCESS";
+    public static final String EMAIL = "EMAIL";
+    public static final String EMAIL_IS_REQUIRED = "EMAIL_IS_REQUIRED";
+    public static final String PASSWORD = "PASSWORD";
+    public static final String PASSWORD_IS_REQUIRED = "PASSWORD_IS_REQUIRED";
 
   
     private Constants() {

@@ -1,181 +1,106 @@
-
 package com.Test.model;
 
-import java.util.Date;
+
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import io.swagger.annotations.ApiModelProperty;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class User.
- */
+
+
 @Entity
-@Table(name = "user_details")
-public class User {
-
-	/** The Constant serialVersionUID. */
-	@SuppressWarnings("unused")
-	private static final long serialVersionUID = 1L;
-
-	/** The test id. */
+@Table(name = "users")
+public class User implements UserDetails {
+	
+	static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "user_id")
 	@ApiModelProperty(value = "userId for the user_details")
-	private UUID userId;
-
-	/** The name. */
-	@ApiModelProperty(value = "name for the user_details")
-	@Column(name = "name")
-	private String name;
-
-	/** The father name. */
-	@ApiModelProperty(value = "fatherName for the user_details")
-	@Column(name = "father_name")
-	private String fatherName;
-
-	/** The mother name. */
-	@ApiModelProperty(value = "motherName for the user_details")
-	@Column(name = "mother_name")
-	private String motherName;
-
-	/** The mobile number. */
-	@ApiModelProperty(value = "mobileNumber for the user_details")
-	@Column(name = "mobile_number")
-	private String mobileNumber;
-
-	/** The test description. */
-	@ApiModelProperty(value = "description for the user_details")
-	@Column(name = "description", columnDefinition = "TEXT")
-	private String description;
+	private UUID id;
 	
-	 @ApiModelProperty(value = "createdDate for the user_details")
-	    @Column(name = "created_date")
-	    private Date createdDate;
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
+	
+	@Column(name = "password", nullable = false)
+	private String password;
+	
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<Role> roles;
 
-	/**
-	 * Gets the user id.
-	 *
-	 * @return the user id
-	 */
-	public UUID getUserId() {
-		return userId;
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		
+        for (Role role : roles) {
+            String name = role.getName().toUpperCase();
+            System.out.println("****"+name);
+           authorities.add(new SimpleGrantedAuthority(name));
+        }
+		
+		return authorities;
 	}
 
-	/**
-	 * Sets the user id.
-	 *
-	 * @param userId the new user id
-	 */
-	public void setUserId(UUID userId) {
-		this.userId = userId;
+	
+	public boolean isAccountNonExpired() {
+		return true;
 	}
 
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+	
+	public boolean isAccountNonLocked() {
+		// we never lock accounts
+		return true;
 	}
 
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name) {
-		this.name = name;
+	
+	public boolean isCredentialsNonExpired() {
+		// credentials never expire
+		return true;
 	}
 
-	/**
-	 * Gets the father name.
-	 *
-	 * @return the father name
-	 */
-	public String getFatherName() {
-		return fatherName;
+	
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	/**
-	 * Sets the father name.
-	 *
-	 * @param fatherName the new father name
-	 */
-	public void setFatherName(String fatherName) {
-		this.fatherName = fatherName;
+	
+	public String getPassword() {
+		return password;
 	}
 
-	/**
-	 * Gets the mother name.
-	 *
-	 * @return the mother name
-	 */
-	public String getMotherName() {
-		return motherName;
-	}
-
-	/**
-	 * Sets the mother name.
-	 *
-	 * @param motherName the new mother name
-	 */
-	public void setMotherName(String motherName) {
-		this.motherName = motherName;
-	}
-
-	/**
-	 * Gets the mobile number.
-	 *
-	 * @return the mobile number
-	 */
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	/**
-	 * Sets the mobile number.
-	 *
-	 * @param mobileNumber the new mobile number
-	 */
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	/**
-	 * Gets the description.
-	 *
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * Sets the description.
-	 *
-	 * @param description the new description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	
+	public String getUsername() {
+		return username;
 	}
 	
+	public List<Role> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }
